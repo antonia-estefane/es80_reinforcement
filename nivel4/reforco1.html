@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ES80</title>
+    <style type="text/css">
+      @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+      *{
+        font-family: "Poppins", sans-serif;
+      }
+    	body {
+    		background-color: #fff;
+        font-size: 20px;
+        padding: 0 80px;
+        text-align: justify;
+    	}
+      .img {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
+      h1, h2, h3 {
+        text-align: center;
+      }
+
+      span {
+        color: blue;
+      }
+
+    </style>
+  </head>
+  <body>
+    <div id="main">
+    	<h1>Mão na massa: Chain of Responsibility</h1>
+      <h2>Problema:</h2>
+
+      <p>
+        Uma aplicação de e-commerce precisa se comunicar com vários bancos diferentes para prover aos seus usuários mais possibilidades de pagamentos, atingindo assim um número maior de usuários e facilitando suas vidas.<br><br>
+
+        Ao modelar uma forma de execução do pagamento, dado que precisamos selecionar um entre vários tipos de bancos, a primeira ideia que surge é utilizar uma estrutura de decisão para verificar, dado um parâmetro, qual o banco correto deve ser utilizado.<br><br>
+
+        já discutimos no post sobre o padrão Strategy que utilizar uma estrutura de decisão pode ser muito complexo, e vimos uma boa solução para este problema. Também vimos exemplos de utilização de estruturas de decisão nos padrõs Abstract Factory e Factory Method.<br><br>
+
+        Poderíamos utilizar os métodos fábricas para gerar o objeto correto para ser utilizado na nossa aplicação. Poderíamos criar estratégias diferentes para cada banco e escolher em tempo de execução.<br><br>
+
+        Em todas estas soluções, nós utilizamos uma forma de “esconder” a estrutura de decisão por trás de uma interface, ou algo similar, para que as alterações fossem menos dolorosas. No entanto, continuamos utilizando as estruturas de decisão.<br><br>
+
+        Vamos analisar então o padrão Chain of Responsibility, que promete acabar com estas estruturas.<br><br>
+      </p>
+
+      <h2>Chain of Responsibility</h2>
+      <p>
+        O padrão Chain of Responsibility possui a seguinte intenção:<br><br>
+
+        “Evitar o acoplamento do remetente de uma solicitação ao seu receptor, ao dar a mais de um objeto a oportunidade de tratar a solicitação. Encadear os objetos receptores, passando a solicitação ao longo da cadeia até que um objeto a trate.” [1]<br><br>
+
+        Pela intenção percebemos como o Chain of Responsibility acaba com as estruturas de decisão, ele cria uma cadeia de objetos e vai passando a responsabilidade entre eles até que alguém possa responder pela chamada.<br><br>
+
+        Vamos então iniciar construindo uma pequena enumeração para identificar os bancos utilizados no nosso sistema:<br><br>
+      </p>
+        
+      <pre>
+        1     <span>public enum</span> IDBancos {
+        2         bancoA, bancoB, bancoC, bancoD
+        3     }
+      </pre>
+      <br><br>
+      Agora vamos construir a classe que vai implementar a cadeia de responsabilidades. Vamos exibir partes do código para facilitar o entendimento.
+      <br><br>
+      <pre>
+        1   <span>public abstract class</span> BancoChain {
+        2
+        3       <span>protected</span> BancoChain next;
+        4       <span>protected</span> IDBancos identificadorDoBanco;
+        5
+        6       <span>public</span> BancoChain(IDBancos id) {
+        7                 next = <span>null</span>;
+        8                 identificadorDoBanco = id;
+        9            }
+        10
+        11     <span>public void</span> setNext(BancoChain forma) {
+        12           <span>if</span> (next == <span>null</span>) {
+        13                    next = forma;
+        14                 } <span>else</span> {
+        15                    next.setNext(forma);
+        16                 }
+        17          }
+        18  }
+      </pre>
+
+      A nossa classe possui apenas dois atributos, o identificador do banco e uma referência para o próximo objeto da corrente. No construtor inicializamos estes atributos. O método setNext recebe uma nova instância da classe e faz o seguinte:<br><br>
+
+      Se o próximo for nulo, então o próximo na corrente será o parâmetro. Caso contrário, repassa esta responsabilidade para o próximo elemento. Assim, a instância que deve ser adicionada na corrente irá percorrer os elementos até chegar no último elemento.<br><br>
+
+      O próximo passo será criar o método para efetuar o pagamento.<br><br>
+
+      <pre>
+        1   <span>public void</span> efetuarPagamento(IDBancos id) <span>throws</span> Exception {
+        2
+        3       if (podeEfetuarPagamento(id)) {
+        4         efetuaPagamento();
+        5       } <span>else</span> {
+        6           <span>if</span> (next == <span>null</span>) {
+        7                 <span>throw new</span>  Exception("banco não cadastrado");
+        8                 identificadorDoBanco = id;
+        9                 }
+        10                next.efetuarPagamento(id);
+        11            }
+        12      }
+        13      <span>private boolean</span> podeEfetuarPagamento(IDBancos id) {
+        14               <span>if </span> (identificadorDoBanco == id){
+        15                        <span>return true;</span>
+        16                 }
+        17                  return false;
+        18            }
+        19      <span>protected abstract void</span> efetuaPagamento();
+      </pre>
+      A primeira parte do algoritmo de pagamento é verificar se o banco atual pode fazer o pagamento. Para isto é utilizado o identificador do banco, que é comparado com o identificador passado por parâmetro. Se o elemento atual puder responder a requisição é chamado o método que vai efetuar o pagamento de fato. Este método é abstrato, e as subclasses devem implementá-lo, com seu próprio mecanismo.<br><br>
+
+      Se o elemento atual não puder responder, ele repassa a chamado ao próximo elemento da lista. Antes disto é feita uma verificação, por questões de segurança, se este próximo elemento realmente existe. Caso nenhum elemento possa responder, é disparada uma exceção.<br><br>
+
+      Agora que definimos a estrutura da cadeia de responsabilidades, vamos implementar um banco concreto, que responde a uma chamada.<br><br>
+
+      <pre>
+          1    <span>public class</span>  BancoA <span>extends</span> BancoChain {
+          2
+          3     <span>public</span> BancoA() {
+          4        <span>super</span>(IDBancos.bancoA);
+          5     }
+          6 
+          7     @Override
+          8     <span>protected void</span> efetuaPagamento() {
+          9        System.out.println("Pagamento efetuado no banco A");
+          10    }
+          11   }
+      </pre>
+      O Banco A inicializa seu ID e, no método de efetuar o pagamento, exibe no terminal que o pagamento foi efetuado. A implementação dos outros bancos segue este exemplo. O ID é iniciado e o método de efetuar o pagamento exibe a saída no terminal.<br><br>
+
+      O cliente deste código seria algo do tipo:<br><br>
+      <pre>
+        1  <span>public static void</span> main(String[] args) {
+        2           BancoChain bancos = <span>new</span> BancoA();
+        3           bancos.setNext(<span>new</span> BancoB());
+        4           bancos.setNext(<span>new</span> BancoC());
+        5           bancos.setNext(<span>new</span> BancoD());
+        6       
+        7      <span>try</span> {
+        8               bancos.efetuarPagamento(IDBancos.bancoC);
+        9               bancos.efetuarPagamento(IDBancos.bancoD);
+        10              bancos.efetuarPagamento(IDBancos.bancoA);
+        11              bancos.efetuarPagamento(IDBancos.bancoB);
+        12     } <span>catch</span> (Exception e) {
+        13              e.printStackTrace();
+        14     }
+        15  }
+      </pre>
+      <br><br>
+      O diagrama UML deste exemplo seria:
+      <div class="img">
+        <img src="https://brizeno.wordpress.com/wp-content/uploads/2011/11/chain.png" width="80%" >
+      </div>
+        
+      <h2>Um pouco de teoria</h2>
+      <p>
+        Vimos pelo exemplo que o padrão Chain of Responsibility fornece uma maneira de tomar decisões com um fraco acoplamento. Perceba que a estrutura de cadeia não possui qualquer informação sobre as classes que compõem a cadeia, da mesma forma, uma classe da cadeia não tem nenhuma noção sobre o formato da estrutura ou sobre elementos nela inseridos.<br><br>
+
+        Assim, é possível variar praticamente todos os componentes sem grandes danos ao projeto. Cada elemento implementa sua própria maneira de responder a requisição, e estas podem ser alteradas facilmente.<br><br>
+
+        O problema é que é preciso tomar cuidado para garantir que as chamadas sejam realmente respondidas. No exemplo foi feita uma verificação para saber se o próximo elemento é nulo, para evitar uma acesso ilegal. Mas esta é uma solução para este problema específico. Cada problema exige o seu próprio cuidado.<br><br>
+
+        <h3>Código fonte completo</h3>
+        O código completo pode ser baixado no seguinte repositório Git: https://github.com/MarcosX/Padr-es-de-Projeto.<br><br>
+
+        Os arquivos estão como um projeto do eclipse, então basta colocar no seu Workspace e fazer o import.<br><br>
+
+        Se gostou do post compartilhe com seus amigos e colegas, senão, comente o que pode ser melhorado. Encontrou algum erro no código? Comente também. Possui alguma outra opinião ou alguma informação adicional? Comenta ai! 😀</p>
+
+      <h3>
+      <a href="https://brizeno.wordpress.com/2011/11/09/mao-na-massa-chain-of-responsibility/" target="_blank">Fonte</a>
+      </h3>
+    </div>
+  </body>
+</html>
