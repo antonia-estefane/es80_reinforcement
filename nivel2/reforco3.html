@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ES80</title>
+    <style type="text/css">
+      @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+      *{
+        font-family: "Poppins", sans-serif;
+      }
+    	body {
+    		background-color: #fff;
+/*    		color: #fff;*/
+        font-size: 20px;
+        padding: 0 80px;
+        text-align: justify;
+    	}
+      h1, h2 {
+        text-align: center;
+      }
+      .img {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="main">
+    	<h1>Prototipagem de Software</h1>
+      <div class="img">
+        <img src="https://miro.medium.com/v2/resize:fit:1100/format:webp/1*6TCsAneorq7Q_Cv8yPy9hA.png">        
+      </div>
+
+      <p>
+        É comum, na etapa da Análise de Requisitos, conversar com o cliente e ele dizer que entendeu tudo, afirmando que gostou da proposta do sistema e das suas funcionalidades. Ele concorda até mesmo com a documentação elaborada e autoriza a implementação do software com base nos requisitos.<br><br>
+
+        Porém, no momento em que o software é concluído e apresentado, ele percebe que pensou bem diferente do que realmente aconteceu. Resultado: cliente frustrado com o software entregue.<br><br>
+
+        Por mais detalhes que tentemos usar durante alguma explicação, é difícil saber o que a outra pessoa está entendendo e imaginando. O contrário também é válido. Esta é uma situação delicada que exige experiência do analista, mas também existem técnicas para amenizar o impacto e facilitar a comunicação. Uma delas é a Prototipagem, uma estratégia concreta, simples e familiar para apresentar ao usuário antecipadamente as funcionalidades requeridas para o software.<br><br>
+
+        <h2>A técnica da prototipagem</h2>
+        Esta técnica tem como finalidade demonstrar as ideias e as características de funcionamento do sistema por meio de desenhos, sejam eles “rabiscos” no papel ou interfaces bem próximas do real, feitas com ferramentas que permitem esboçar a interface de uma maneira semelhante ao sistema final.<br><br>
+
+        O uso de protótipos possibilita mostrar a interface, o processo de interação com funcionalidades e botões, de uma maneira fácil de se compreender. Por meio dessa informação concreta o usuário poderá não apenas entender, mas também contribuir com segurança, expressando o que gostou ou não, quais são as funcionalidades fáceis e eficazes de se utilizar etc.<br><br>
+      </p>
+      <div class="img">
+        <img src="https://miro.medium.com/v2/resize:fit:720/format:webp/1*TO96l1DJl3rFwRduzY0YFw.jpeg">
+      </div>
+      
+      <p>
+        Segundo PRESSMAN (2002), a Prototipagem é uma estratégia utilizada tanto na área da Engenharia de Software (ES) quanto na Interação Humano-Computador (IHC), porém para cada uma há uma finalidade distinta em sua utilização. Na ES, a preocupação está em como o software será desenvolvido do ponto de vista tecnológico, compreendendo os requisitos do sistema e as funcionalidades necessárias. Já na IHC a preocupação está relacionada com o modelo de interação entre o usuário e o sistema, ou seja, quais tarefas serão realizadas por meio do sistema, como elas serão apresentadas, se as opções existentes estão relacionadas com o mapeamento natural do usuário etc.<br><br>
+
+        Essa estratégia também é muito utilizada no início do processo de desenvolvimento para conversar com cliente, sendo que há várias formas de utilizá-la, você pode levar um desenho pronto para ser discutido, ou pode, simplesmente, levar papel e lápis e, durante a conversa, esboçar um desenho.<br><br>
+      </p>
+        <h2>Tipos de protótipos</h2>
+        <p>
+        São três os tipos de protótipos, onde suas principais diferenças estão no nível de fidelidade em relação ao sistema final:
+        </p>
+        <h3>1) Baixa-Fidelidade (wireframes)</h3>
+        <p>
+        Esses protótipos não são semelhantes ao sistema final, na maioria das vezes, são feitos com auxílio do papel e lápis para esboçar as características iniciais da interface e o seu funcionamento. São usados também como um auxílio na conversa entre o projetista e os usuários sobre as características desejáveis e as soluções mais adequadas.
+        </p>
+        <div class="img">
+          <img src="https://miro.medium.com/v2/resize:fit:720/format:webp/1*hZi08cvg6FXUXjyoxPjZXw.jpeg"><br>
+          <small>Protótipo desenhado à mão no papel</small><br><br>
+        </div>
+        
+
+        <p>Por causa do tipo de material utilizado para elaborar esses protótipos, eles são mais baratos, rápidos e fáceis de fazer e, por meio deles, é possível coletar muitas informações a respeito dos requisitos da interface.</p>
+        <div class="img">
+          <img src="https://miro.medium.com/v2/resize:fit:720/format:webp/1*5aWTfIC3Pget5iA1DoR52A.png"><br>
+          <small>Protótipo feito com Pencil Project</small><br><br>
+        </div>
+        
+        <p>
+        Para quem não quer usar o papel mas precisa desenhar protótipos de Baixa-Fidelidade rapidamente, pode usar as seguintes ferramentas:
+      </p>
+      <ul>
+        <li>Pencil Project;</li>
+        <li>Balsamiq;</li>
+        <li>OmniGraffle</li>
+      </ul>
+
+      <h3>2) Média-Fidelidade (mockups)</h3>
+      <p>
+      Esses protótipos são mais próximos do sistema final, se comparado com os de Baixa-Fidelidade. Geralmente, são feitos utilizando ferramentas computacionais, embora não precisem ser as mesmas ferramentas que serão utilizadas para desenvolver o sistema final. Permitem simular o comportamento de interação da interface e não requerem um mesmo conhecimento técnico necessário para implementar a interface final.
+    </p>
+    <div class="img">
+          <img src="https://miro.medium.com/v2/resize:fit:720/format:webp/1*g1JVPIONmdk0UCb-kU8Rag.gif"><br>
+          <small>por Ramil Derogongun — https://dribbble.com/shots/1464790--AEP-Delete-Action</small><br><br>
+    </div>
+
+    <p>
+    Há algumas ferramentas que podem ser utilizadas para desenvolver protótipos nesse nível de fidelidade, algumas delas são:
+    </p>
+    <ul>
+      <li>Sketch;</li>
+      <li>InVision;</li>
+      <li>Adobe XD;</li>
+      <li>Axure RP;</li>
+      <li>JustinMind;</li>
+      <li>UXPin;</li>
+      <li>Framer;</li>
+      <li>Origami;</li>
+      <li>entre outras</li>
+    </ul>
+
+      <h3>3) Alta-Fidelidade</h3>
+      <p>
+      Esse tipo de protótipo oferece uma interface semelhante à final, pois são utilizadas as mesmas matérias (software e hardware) que serão utilizadas no sistema. Os protótipos são desenvolvidos diretamente em linguagem de programação, permitindo apresentar alguns recursos da interface com interação. Na prototipagem de Alta-Fidelidade já existe a implementação de algumas partes do sistema.<br><br>
+
+      Esse protótipo oferece alto grau de interatividade e de realismo, pois é possível ver e interagir com uma interface próxima à final. No entanto, há um custo maior no seu desenvolvimento e já é necessário um conhecimento técnico semelhante àquele para desenvolver o produto final.
+      <div class="img">
+        <img src="https://miro.medium.com/v2/resize:fit:1100/format:webp/1*KO23sj8Ol9e7qAQIan095Q.png"><br>
+        <small>Tema HTML interativo totalmente funcional (Theme Forest), pode ser usado para facilitar o protótipo de Alta-Fidelidade</small><br><br>
+      </div>
+      
+      <p>
+      Para softwares baseados na web, existem algumas ferramentas que poderão ajudar a fazer uma interface interativa:
+      </p>  
+      <ul>
+        <li>Bootstrap Studio;</li>
+        <li>Pingendo;</li>
+        <li>BootPly;</li>
+      </ul>
+      <p>
+      A vantagem do protótipo de papel na conversa com o cliente
+      A seguir será detalhado o processo de prototipagem de Baixa-Fidelidade em papel, pois embora pareça simples, ela é um método bastante eficaz para dar clareza na conversa entre o projetista e o cliente.<br><br>
+
+      Não é fácil para um usuário comum entender o raciocínio de um programador ou projetista. É justamente neste caso que o desenho (protótipo) passa a ser uma ponte entre eles, criando uma linguagem que os dois possam entender e evitando a necessidade de tentar imaginar o que a outra pessoa está pensando.<br><br>
+
+
+      É interessante o uso do papel porque ele é uma ferramenta que todos dominam. Além de oferecer flexibilidade e agilidade, podendo-se manipular, rabiscar e modificar de forma bem simples, ainda inclui o cliente no processo dando-lhe mais satisfação em participar da conversa, uma vez que ele conhece bem o lápis e papel.<br><br>
+
+      Quando o protótipo é feito com uma ferramenta computacional, mesmo que seja “mais bonito”, cria-se uma barreira entre o cliente e o projetista, pois a computação é algo mais distante dos usuários comuns e eles não têm tanto controle.<br><br>
+
+      Mas, caso se escolha usar o computador para a reunião com o cliente, é importante que o resultado seja simples para não gerar uma “falsa expectativa”. Na maioria das vezes, ao usar protótipos de Média ou Alta-Fidelidade, mesmo explicando-lhe que é apenas um protótipo, o cliente insiste em acreditar que o trabalho já está avançado e que aquilo que ele está vendo (interface, navegação entre telas etc.) já é o sistema pronto. Isso pode gerar desconforto, pois o cliente achará que a entrega será mais fácil e rápida e, consequentemente, imaginará que o custo será menor.<br><br>
+
+      Com o protótipo em papel, o cliente consegue perceber de uma maneira fácil que tudo é apenas uma ideia e que está sendo feito um esboço para entender melhor o que ele pensa, permitindo que fique à vontade para expressar-se, dizer suas opiniões, ou seja, rabiscar, também, o papel.<br><br>
+      </p>    
+      <h2>O protótipo de papel</h2>
+      <p>
+      O conceito de prototipagem tornou-se comum na década de 1990, quando começou a ser utilizado por algumas empresas como a IBM e a Microsoft como uma parte do processo de desenvolvimento de produtos (SNYDER, 2003). No entanto, somente em 2002 houve o crescimento do uso da prototipagem, tanto nas empresas grandes, quanto nas pequenas.<br><br>
+
+      Se considerarmos o UCD, um bom momento para a prototipagem é na etapa do Desenho, pois você já conhece quem são os usuários e quais as possíveis funcionalidades. Como já possui algumas informações relevantes, é possível mapear os eventos da vida real para o mundo virtual, esboçando os primeiros desenhos. Porém, nada impede que, logo na primeira conversa, alguém pegue um papel para desenhar o que as pessoas estão discutindo.<br><br>
+
+      SNYDER (2003) aponta alguns passos que podem ser utilizados para criar, apresentar e testar um protótipo:<br><br>
+
+      <ol>
+        <li>Definir os stakeholders (pessoas envolvidas no negócio da empresa) para elaborar as interfaces;</li>
+        <li>Escolher algumas das tarefas que o usuário realizará com apoio do sistema a ser projetado;</li>
+        <li>Realizar o esboço da interface, que poderá conter menus, páginas, caixas de diálogo, mensagens e outras características para permitir ao usuário desempenhar as funções na tarefa;</li>
+        <li>Realizar testes de usabilidade com o protótipo;</li>
+        <li>Definir uma pessoa para representar os stakeholders;</li>
+        <li>Pedir para essa pessoa realizar uma determinada tarefa, utilizando o protótipo em papel. Algo semelhante ao natural, pressionar o papel para simular um clique no botão, preencher em um retângulo o nome para simular um cadastro etc;</li>
+        <li>
+          Um ou dois dos membros da equipe têm de desempenhar as funcionalidades do computador, ou seja, se uma pessoa clica em um botão e a próxima tela está em um próximo papel, então o membro deve trocar as folhas para o usuário ter acesso à outra interface do sistema, como se estivesse navegando;
+        </li>
+        <li>
+          Um membro (experiente em usabilidade) deve conduzir o teste enquanto os outros observam se há alguma dificuldade e como o usuário interage com o protótipo. Após a realização desse teste é possível identificar em quais interfaces o usuário teve dificuldade, em quais momentos ele não soube como prosseguir etc.
+        </li>
+      </ol>
+      <br><br>
+      Algumas empresas com prestígio no desenvolvimento de aplicativos web estão investindo em protótipos de papel para explicar a todos as funcionalidades de seus sistemas. Um exemplo de sucesso foi realizado pela empresa Google na explicação do Google Docs. Por meio de um protótipo em papel, os funcionários da empresa conseguiram explicar, de uma maneira divertida e didática, o funcionamento da ferramenta para todos os usuários da web.
+
+      <h3>
+      <a href="https://www.devmedia.com.br/introducao-a-engenharia-de-requisitos/29454" target="_blank">Fonte</a>
+      </h3>
+    </div>
+  </body>
+</html>

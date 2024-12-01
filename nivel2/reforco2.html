@@ -1,0 +1,427 @@
+<!doctype html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ES80</title>
+    <style type="text/css">
+      @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+      *{
+        font-family: "Poppins", sans-serif;
+      }
+    	body {
+        background-color: #fff;
+        font-size: 20px;
+        padding: 0 80px;
+        text-align: justify;
+      }
+      h1, h2 {
+        text-align: center;
+      }
+      td, th, tr{
+        padding: 10px;
+      }
+      table, tr, td, th {
+        border: 1px solid #333;
+        border-collapse: collapse;
+      }
+      .bloco {
+        border: 1px solid #333;
+        border-left: 10px solid blue;
+        padding: 20px;
+        font-style: italic;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="main">
+    	<h1>Exemplos de Requisitos Não Funcionais</h1>
+      <h2>Desempenho</h2>
+      <table>
+        <tr>
+          <th>Identificador</th>
+          <td>RNF001</td>
+          <th>Categoria </th>
+          <td>Desempenho</td>
+        </tr>
+        <tr>
+          <th>Nome</th>
+          <td colspan=3>Tempo limite para processamento de todos os lotes de fatura na rotina diária</td>       
+        </tr>
+        <tr>
+          <th>Data de criação </th>
+          <td>18/01/2016</td>
+          <th>Autor </th>
+          <td>Alexandre de Afrodísias</td>
+        </tr>
+        <tr>
+          <th>Data da última alteração    </th>
+          <td>N/A</td>
+          <th>Autor</th>
+          <td>N/A</td>
+        </tr>
+        <tr>
+          <th>Versão    </th>
+          <td>1 </td>
+          <th>Prioridade</th>
+          <td>Essencial</td>
+        </tr>
+        <tr>
+          <th>Descrição</th>
+          <td colspan=3>
+            No módulo de faturamento, o processamento de faturas em lote é um processo oneroso em termos de memória e CPU, devido ao alto volume de dados. Em função desta realidade, o sistema deverá prover recursos para processamento paralelo (multithreading) que possibilite processar lotes de faturas de forma paralela, compactando o tempo de execução da rotina diária.<br><br>
+            A média diária de faturas a serem processadas é 80.000. Cada lote contem 500 faturas, totalizando 160 lotes. A janela de produção disponível para o processamento de todos os lotes é de 4h.<br><br>
+
+            Considerando as medidas acima, o sistema deve processar todos os 160 lotes em, no máximo, 4h. Para atender isso, o sistema deverá rodar os lotes na quantidade máxima permitida de trheads, considerando a seguinte especificação do servidor de aplicativos:<br><br>
+
+            – 16 processadores com quatro núcleos cada.<br>
+            – 64 GB de memória RAM.<br>
+            – 1 TB de espaço em disco.<br><br>
+
+            Obs.: deve haver no sistema alguma funcionalidade ou arquivo de configuração, onde seja possível o próprio analista da TI parametrizar a quantidade de threads que o sistema deverá rodar. Esta informação não pode ser fixada em código e nem ser de domínio apenas do fornecedor que implementará a solução.
+          </td>
+        </tr>
+      </table>
+      <h2>Disponibilidade</h2>
+      <table>
+        <tr>
+          <th>Identificador</th>
+          <td>RNF002</td>
+          <th>Categoria </th>
+          <td>Disponibilidade</td>
+        </tr>
+        <tr>
+          <th>Nome</th>
+          <td colspan=3>Utilização do módulo de Informações Cadastrais em modo off-line</td>       
+        </tr>
+        <tr>
+          <th>Data de criação </th>
+          <td>25/01/2015 </td>
+          <th>Autor </th>
+          <td>Aristarco de Samos</td>
+        </tr>
+        <tr>
+          <th>Data da última alteração    </th>
+          <td>N/A</td>
+          <th>Autor</th>
+          <td>N/A</td>
+        </tr>
+        <tr>
+          <th>Versão    </th>
+          <td>1 </td>
+          <th>Prioridade</th>
+          <td>Importante</td>
+        </tr>
+        <tr>
+          <th>Descrição</th>
+          <td colspan=3>
+            O módulo de informações cadastrais é um módulo do CRM que precisa funcionar 24 x 7 (vinte e quatro horas por dia, sete dias por semana) na operação do Call Center da empresa. Por isso é necessário que o sistema possua recursos para sua utilização em modo “off-line”, pois em nossa infraestrutura não é possível ter garantia de 100% de disponibilidade do servidor de banco de dados. Para informação, a garantia atual é de 89% de disponibilidade do ambiente.<br><br>
+            Todos os registros de clientes cadastrados no sistema poderão ser mantidos (alterados/consultados/excluídos) com o sistema off-line e novos registros de clientes (inclusão) poderão ser incluídos também com o sistema off-line. Todos os relatórios do módulo de informações cadastrais também precisarão rodar off-line.<br><br>
+
+            Cada usuário do módulo deverá ter em sua estação de trabalho uma cópia do banco de dados do módulo citado, sempre com a mesma versão do modelo de dados utilizado. Deverá haver uma rotina no banco de dados do sistema (banco hospedado no servidor da aplicação), que a cada operação de inclusão/alteração/exclusão de registros nas tabelas do módulo de informações cadastrais sincronize estas atualizações com as bases de dados locais de cada usuário, para manter a massa de dados na mesma posição.<br><br>
+
+            Sempre que o usuário abrir o sistema uma função deverá verificar se há conectividade com o servidor de banco de dados. Se houver, deverá conectar neste ambiente (servidor), senão, deverá conectar na versão do banco de dados local da aplicação.<br><br>
+
+            O sistema deverá ainda ser preparado para fazer sincronização dos dados incluídos/alterados/excluídos quando no uso do banco de dados local (sistema off-line), e na sincronização de “volta” (banco local para banco no servidor), verificar se mais de um usuário manteve um mesmo registro, e realizar merge para que não haja defasagem/perda de dados.<br><br>
+          </td>
+        </tr>
+      </table>
+      <h2>Segurança</h2>
+      <table>
+        <tr>
+          <th>Identificador</th>
+          <td>RNF003</td>
+          <th>Categoria </th>
+          <td>Segurança</td>
+        </tr>
+        <tr>
+          <th>Nome</th>
+          <td colspan=3>Autenticação de usuário para consumo de webservices do sistema por sistemas externos</td>       
+        </tr>
+        <tr>
+          <th>Data de criação </th>
+          <td>30/01/2016</td>
+          <th>Autor </th>
+          <td>André Comte Sponville</td>
+        </tr>
+        <tr>
+          <th>Data da última alteração    </th>
+          <td>N/A</td>
+          <th>Autor</th>
+          <td>N/A</td>
+        </tr>
+        <tr>
+          <th>Versão    </th>
+          <td>1 </td>
+          <th>Prioridade</th>
+          <td>Essencial</td>
+        </tr>
+        <tr>
+          <th>Descrição</th>
+          <td colspan=3>
+            Todas as APIs do sistema expostas como webservices poderão ser acessadas por sistemas externos de clientes, fornecedores e parceiros. Este acesso precisa ser seguro, com autenticação em nível do servidor e em nível da aplicação.<br><br>
+            Para autenticação no nível de servidor, o IP de cada consumidor dos webservices deverá ser cadastrado no servidor web onde o sistema estará hospedado, com acesso para execução de scripts. Há uma política de segurança que revisa a validade destes acessos a cada mês, isso deve ser considerado no tratamento de exceções no contexto deste requisito.<br><br>
+
+            Para autenticação no nível da aplicação, cada consumidor dos webservices deverá possuir um usuário ativo no sistema. A senha do usuário deverá ser gravada/trafegada utilizando-se o algoritmo SHA-3 para criptografia.<br><br>
+
+            O sistema não poderá permitir cache de senha, salvamento de senha ou qualquer outro recurso do tipo. A cada novo acesso, a autenticação deverá se realizada novamente, de maneira integral.<br><br>
+
+            Deverá haver uma política de segurança que assegure que, a cada mês, a senha de cada um dos usuários citados expire e precise ser renovada, e que tenha critérios de complexidade alta de senhas (vide o documento da área de infraestrutura da empresa que tenha detalhes sobre os níveis de complexidade exigidos para cadastro de senhas); tudo isso deve ser considerado no tratamento de exceções no contexto deste requisito.
+          </td>
+        </tr>
+      </table>
+    	
+      <h2>Interoperabilidade</h2>
+      <table>
+        <tr>
+          <th>Identificador</th>
+          <td>RNF004</td>
+          <th>Categoria </th>
+          <td>Interoperabilidade</td>
+        </tr>
+        <tr>
+          <th>Nome</th>
+          <td colspan=3>Integração com sistema do Banco Central para envio de informações de transferência internacional de valores</td>       
+        </tr>
+        <tr>
+          <th>Data de criação </th>
+          <td>30/01/2016</td>
+          <th>Autor </th>
+          <td>René Descartes</td>
+        </tr>
+        <tr>
+          <th>Data da última alteração    </th>
+          <td>N/A</td>
+          <th>Autor</th>
+          <td>N/A</td>
+        </tr>
+        <tr>
+          <th>Versão    </th>
+          <td>1 </td>
+          <th>Prioridade</th>
+          <td>Essencial</td>
+        </tr>
+        <tr>
+          <th>Descrição</th>
+          <td colspan=3>
+            Diariamente, em janela de produção específica, o sistema deverá enviar para o BACEN (Banco Central) as informações do processamento diário (sempre com um dia de atraso, ou D-1) de transferências internacionais de valores realizadas pelo banco.<br><br>
+            A integração se dará por envio de arquivo texto, a ser confeccionado conforme layout específico para o arquivo CI03. Os dados do layout para o arquivo citado devem ser obtidos em https://www.bcb.gov.br/?INFOL,<br><br>
+
+            página do site do BACEN que mantém atualizadas as informações sobre o layout do arquivo CI03. O protocolo a ser utilizado para transmissão é o FTP, mas por razões de segurança do BACEN, a porta utilizada nunca é a 21. A conexão é autenticada, com usuário e senha que o BACEN fornece ao banco. Para o sistema transmissor, o usuário e senha não precisam ser criptografados no ato da abertura da conexão FTP com o BACEN.<br><br>
+
+            Deverá haver um recurso no sistema que permita avisar ao administrador do sistema, por e-mail e SMS (sempre ambos), quando a transmissão não for bem sucedida, detalhando qual a causa do insucesso. Este mesmo recurso deve permitir que, após intervenção humana (seja nos dados que populam o arquivo ou nas configurações do sistema), possa ser realizada a retransmissão dos arquivos.<br><br>
+
+            Todo o processo de envio/reenvio do arquivo deverá ser logado. Os logs devem ser gravados em arquivo texto quando o envio for bem sucedido, e quando não for, em arquivo texto e no Event Viewer do servidor de aplicações onde o sistema estará hospedado.<br><br>
+          </td>
+        </tr>
+      </table>
+      <br>
+      <div class="bloco">
+        /* para requisitos não funcionais de integração (categoria Integração) que envolvam layouts de arquivos, estrutura de arquivos xml ou algo do tipo é recomendado que se detalhe a estrutura do arquivo (layout) no requisito, ou que se faça referência a algum documento que contenha os detalhes de tal estrutura. Quando não há esta especificação é muito comum faltar campo, ter campos com tipos errados, validações não passarem etc. e isso sempre gera muitos problemas */
+      </div>
+      <h2>Usabilidade</h2>
+      <table>
+        <tr>
+          <th>Identificador</th>
+          <td>RNF005</td>
+          <th>Categoria </th>
+          <td>Usabilidade</td>
+        </tr>
+        <tr>
+          <th>Nome</th>
+          <td colspan=3>Uso de Design responsivo nas interfaces gráficas</td>       
+        </tr>
+        <tr>
+          <th>Data de criação </th>
+          <td>30/01/2016</td>
+          <th>Autor </th>
+          <td>Diógenes de Apolônia</td>
+        </tr>
+        <tr>
+          <th>Data da última alteração    </th>
+          <td>N/A</td>
+          <th>Autor</th>
+          <td>N/A</td>
+        </tr>
+        <tr>
+          <th>Versão    </th>
+          <td>1 </td>
+          <th>Prioridade</th>
+          <td>Importante</td>
+        </tr>
+        <tr>
+          <th>Descrição</th>
+          <td colspan=3>
+            O sistema de Atendimento a Clientes será construído para rodar em ambiente web. Deverá possui um design responsivo (https://en.wikipedia.org/wiki/Responsive_web_design).<br><br>
+            A interface do sistema deverá se comporta adequadamente independente do front-end que será utilizado para acesso – Browser, Smartphone ou Tablet.<br><br>
+
+            Obs.: durante o processo de homologação do sistema serão realizados testes de usabilidade validando este requisito. O não atendimento a este requisito gerará o não pagamento relativo à fração pertinente à funcionalidade que não for homologada, segundo os critérios aqui apresentados.
+          </td>
+        </tr>
+      </table>
+
+      <h2>Compatibilidade</h2>
+
+      <table>
+        <tr>
+          <th>Identificador</th>
+          <td>RNF006</td>
+          <th>Categoria </th>
+          <td>Compatibilidade</td>
+        </tr>
+        <tr>
+          <th>Nome</th>
+          <td colspan=3>Uso de Design responsivo nas interfaces gráficas</td>       
+        </tr>
+        <tr>
+          <th>Data de criação </th>
+          <td>30/01/2016</td>
+          <th>Autor </th>
+          <td>Friedrich Engels</td>
+        </tr>
+        <tr>
+          <th>Data da última alteração    </th>
+          <td>N/A</td>
+          <th>Autor</th>
+          <td>N/A</td>
+        </tr>
+        <tr>
+          <th>Versão    </th>
+          <td>1 </td>
+          <th>Prioridade</th>
+          <td>Essencial</td>
+        </tr>
+        <tr>
+          <th>Descrição</th>
+          <td colspan=3>
+            O parque da empresa é composto, nas estações de trabalho, por sistemas operacionais Linux e Windows. Para Linux a variante utilizada é o Ubuntu a partir da versão 15.10, para Windows utiliza-se versões a partir do XP (XP, Vista 7 e 8), considerando sempre o service pack mais recente.<br><br>
+            Para ambos os sistemas são aplicadas rigorosamente as atualizações dos fabricantes, sempre que são liberadas.<br><br>
+
+            O sistema, por se tratar de um aplicativo desktop em arquitetura cliente/servidor, deverá rodar nos sistemas operacionais elencados neste requisito considerando as demais informações aqui descritas. O comportamento deve ser o mesmo, tanto no que se refere às funcionalidades quanto à instalação.<br><br>
+
+            Obs.: para este requisito haverá garantia do fornecedor do sistema para que as releases do aplicativo mantenham retrocompatibilidade com os sistemas operacionais citados. Este garantia vigorará enquanto o contrato de manutenção estiver vigente.
+          </td>
+        </tr>
+      </table>
+
+      <h2>Padrão</h2>
+      <table>
+        <tr>
+          <th>Identificador</th>
+          <td>RNF007</td>
+          <th>Categoria </th>
+          <td>Padrão</td>
+        </tr>
+        <tr>
+          <th>Nome</th>
+          <td colspan=3>Divisão arquitetural do sistema em camadas para desacoplamento</td>       
+        </tr>
+        <tr>
+          <th>Data de criação </th>
+          <td>30/01/2016</td>
+          <th>Autor </th>
+          <td>Empédocles</td>
+        </tr>
+        <tr>
+          <th>Data da última alteração    </th>
+          <td>N/A</td>
+          <th>Autor</th>
+          <td>N/A</td>
+        </tr>
+        <tr>
+          <th>Versão    </th>
+          <td>1 </td>
+          <th>Prioridade</th>
+          <td>Essencial</td>
+        </tr>
+        <tr>
+          <th>Descrição</th>
+          <td colspan=3>
+            O projeto do software deverá ser fortemente orientado a baixo acoplamento e alta coesão, primando pela melhor separação de responsabilidades.<br><br>
+            Todo o projeto deverá ser feito utilizando uma arquitetura separada em camadas, onde cada camada conterá apenas os algoritmos relacionados à sua responsabilidade. Abaixo as camadas que deverão ser utilizadas, e suas responsabilidades:<br><br>
+
+            <strong>Interface</strong>: abrigar lógicas de tela, validação de campos, acionamento de comandos, códigos para design de interface etc. Obs.: Para esta camada deverá ser utilizado o “code behind” de cada tela, não podendo ser criada uma camada “adicional”.<br><br>
+
+            <strong>Negócio</strong>: abrigar lógicas de negócio, onde será codificado o escopo das regras de negócio associadas aos requisitos funcionais pertinentes à funcionalidade.<br><br>
+
+            <strong>Dados</strong>: abrigar lógicas de acesso a dados, comandos SQL ou comandos para utilização de mecanismos de persistência utilizado, para o caso de uso de ORM.<br><br>
+
+            <strong>Segurança</strong>: abrigar lógicas de autenticação, auditoria, manutenção de usuários.<br><br>
+
+            <strong>Infraestrutura</strong>: abrigar lógicas não relacionadas a interfaces gráficas, regras de negócio, dados ou segurança, mas que poderão ser utilizadas em todas estas camadas. Conterá recursos para gravação de logs, transferência de arquivos, mensagens, envio/recepção de e-mails etc.<br><br>
+
+            Obs.: em nenhuma das camadas serão permitidos métodos com mais de 40 linhas de código.
+          </td>
+        </tr>
+      </table>
+
+      <h2>Legal</h2>
+      <table>
+        <tr>
+          <th>Identificador</th>
+          <td>RNF008</td>
+          <th>Categoria </th>
+          <td>Legal</td>
+        </tr>
+        <tr>
+          <th>Nome</th>
+          <td colspan=3>Atendimento à instrução normativa 554 da ANS (Agência Nacional de Saúde)</td>       
+        </tr>
+        <tr>
+          <th>Data de criação </th>
+          <td>30/01/2016</td>
+          <th>Autor </th>
+          <td>Hipócrates</td>
+        </tr>
+        <tr>
+          <th>Data da última alteração    </th>
+          <td>N/A</td>
+          <th>Autor</th>
+          <td>N/A</td>
+        </tr>
+        <tr>
+          <th>Versão    </th>
+          <td>1 </td>
+          <th>Prioridade</th>
+          <td>Essencial</td>
+        </tr>
+        <tr>
+          <th>Descrição</th>
+          <td colspan=3>
+            Para atendimento à instrução normativa 554 da ANS, o módulo de prontuário deverá gravar em todas as suas tabelas as informações de data/hora do atendimento realizado e dados do médico que realizou o atendimento (CRM e nome completo). Estas informações poderão ser solicitadas pela ANS há qualquer momento, sem aviso prévio.<br><br>
+            Para atender este requisito, cada tabela do módulo de prontuário deverá conter as colunas abaixo, com as respectivas especificações:<br>
+            <table>
+              <tr>
+                <th>Campo</th>
+                <th>Descrição</th>
+                <th>Tipo</th>
+                <th>Obrigatório</th>
+              </tr>
+              <tr>
+                <td>DTHRATEND</td>
+                <td>Data e hora em que o médico atualizou o prontuário.</td>
+                <td>Datetime</td>
+                <td>Sim</td>
+              </tr>
+              <tr>
+                <td>NMMEDICO</td>
+                <td>Nome do médico que atualizou o prontuário.</td>
+                <td>Varchar(100)  </td>
+                <td>Sim</td>
+              </tr>
+              <tr>
+                <td>CRMMEDICO</td>
+                <td>CRM do médico que atualizou o prontuário. </td>
+                <td>Varchar(10) </td>
+                <td>Sim</td>
+              </tr>
+            </table>
+            <br><br>
+            Deverá ser criado um relatório no módulo correspondente do sistema, onde conterá a informação deste requisito. Este relatório será utilizado numa eventual visita dos fiscais da ANS, ou caso a ANS solicite envio de comprovação do atendimento à norma 554.
+          </td>
+        </tr>
+      </table>
+      <h3><a href="https://www.ateomomento.com.br/exemplos-requisitos-nao-funcionais/" target="_blank">Fonte</a></h3>
+    </div>
+  </body>
+</html>

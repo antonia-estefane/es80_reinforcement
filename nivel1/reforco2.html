@@ -33,10 +33,17 @@
       }
       table, th, tr, td {
         border: 1px solid #333;
+        border-collapse: collapse;
       }
       th {
         text-align: center;
         padding: 10px;
+      }
+      .img {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
       }
     </style>
   </head>
@@ -109,10 +116,11 @@
 
       No caso de desenvolvimento ágil, a documentação de requisitos é feita de forma simplificada, por meio de histórias do usuário, conforme estudamos no Capítulo 2. Por outro lado, em alguns projetos, ainda se exige um Documento de Especificação de Requisitos, no qual todos os requisitos do software que se pretende construir — incluindo requisitos funcionais e não-funcionais — são documentados em linguagem natural (português, inglês, etc.). Na década de 90, chegou-se a propor um padrão para Documentos de Especificação de Requisitos, denominado Padrão IEEE 830. Ele foi proposto no contexto de Processos Waterfall, isto é, processos que possuem uma longa fase inicial de levantamento de requisitos. As principais seções de um documento de requisitos no padrão IEEE 830 são mostradas na figura da próxima página.<br><br>
     </p>
+    <div class="img">
       <img src="https://engsoftmoderna.info/figs/cap3/padrao-ieee-830.svg" alt="Ilustração Documento de Requisitos no Padrão IEEE 830"><br>
       <small>Documento de Requisitos no Padrão IEEE 830</small>
-
-
+    </div>
+      
       Após sua especificação, os requisitos devem ser verificados e validados. O objetivo é garantir que eles estejam corretos, precisos, completos, consistentes e verificáveis, conforme discutido a seguir.<br><br>
       <ul>
         <li>
@@ -157,8 +165,12 @@
       <p>
       A próxima figura resume um pouco o que foi estudado sobre requisitos até agora. Ela mostra que os requisitos são a ponte que liga um problema do mundo real a um sistema de software que o soluciona. Usaremos essa figura para motivar e apresentar os temas que estudaremos no restante deste capítulo.
       </p>
-      <img src="https://engsoftmoderna.info/figs/cap3/requisitos.svg" alt="ilustração Requisitos são a ponte que liga um problema do mundo real a um sistema de software que o soluciona."><br>
-      <small>Requisitos são a ponte que liga um problema do mundo real a um sistema de software que o soluciona.</small>
+      <div class="img">
+        <img src="https://engsoftmoderna.info/figs/cap3/requisitos.svg" alt="ilustração Requisitos são a ponte que liga um problema do mundo real a um sistema de software que o soluciona."><br>
+        <small>Requisitos são a ponte que liga um problema do mundo real a um sistema de software que o soluciona.</small>
+
+      </div>
+      
       <p>
       Requisitos são a “ponte” que liga um problema do mundo real a um sistema de software que o soluciona.
       Requisitos são a ponte que liga um problema do mundo real a um sistema de software que o soluciona.
@@ -176,7 +188,7 @@
     </p>
       <div class="bloco">
       História de Usuário = Cartão + Conversas + Confirmação
-      </div>
+      </div><br><br>
 
       A seguir, exploramos cada uma dessas partes de uma história:<br><br>
       <ul>
@@ -382,9 +394,11 @@
       No Capítulo 4, vamos estudar a linguagem de modelagem gráfica UML. No entanto, gostaríamos de adiantar e comentar sobre um dos diagramas UML, chamado <strong>Diagrama de Casos de Uso</strong>. Esse diagrama é um índice gráfico de casos de uso. Ele representa os atores de um sistema (como pequenos bonecos) e os casos de uso (como elipses). Mostram-se também dois tipos de relacionamento: (1) ligando ator com caso de uso, que indicam que um ator participa de um determinado caso de uso; (2) ligando dois casos de uso, que indicam que um caso de uso inclui ou estende outro caso de uso.<br><br>
 
       Um exemplo simples de Diagrama de Caso de Uso para o nosso sistema bancário é mostrado na figura da próxima página. Nele estão representados dois atores: Cliente e Gerente. Cliente participa dos seguintes casos de uso: Sacar Dinheiro e Transferir Valores. E Gerente é o ator principal do caso de uso Abrir Conta. O diagrama também deixa explícito que Transferir Valores inclui o caso de uso Autenticar Cliente. Por fim, veja que os casos de uso são representados dentro de um retângulo, que delimita as fronteiras do sistema. Os dois atores são representados fora dessa fronteira.<br><br>
+      <div class="img">
       <img src="https://engsoftmoderna.info/figs/cap3/diagrama-caso-uso.svg" alt="Exemplo de Diagrama UML de Casos de Uso"><br>
       
       <small>Exemplo de Diagrama UML de Casos de Uso</small><br><br>
+      </div>
       <strong>Aprofundamento</strong>: Neste livro, fazemos uma distinção entre casos de uso (documentos textuais para especificar requisitos) e diagramas de caso uso (índices gráficos de casos de uso, conforme proposto em UML). A mesma decisão é adotada, por exemplo, por Craig Larman, em seu livro sobre UML e padrões de projeto (link). Ele afirma que casos de uso são documentos textuais e não diagramas. Portanto, a modelagem de casos de uso é essencialmente uma ação de redigir texto e não de desenhar diagramas. E também por Martin Fowler, que chega a afirmar que diagramas UML de caso de uso possuem pouco valor — a importância de casos de uso está no texto, que não é padronizado em UML. Portanto, quando for adotar casos de uso coloque sua energia no texto. Por outro lado, outros autores, para evitar qualquer confusão optam por usar o termo <strong>cenários de uso</strong>, em vez de casos de uso.<br><br>
 
       <h2>3.4.2 Perguntas Frequentes </h2>
@@ -404,9 +418,11 @@
       Uma solução consiste em implementar um sistema simples, com um conjunto de requisitos mínimos, mas que sejam suficientes para testar a viabilidade de continuar investindo no seu desenvolvimento. Em Lean Startup, esse primeiro sistema é chamado de <strong>Produto Mínimo Viável (MVP)</strong>. Costuma-se dizer também que o objetivo de um MVP é testar uma hipótese de negócio.<br><br>
 
       Lean startup propõe um método sistemático e científico para construção e validação de MVPs. Esse método consiste em um ciclo com três passos: <strong>construir, medir e aprender</strong> (veja próxima figura). No primeiro passo (construir), tem-se uma ideia de produto e então implementa-se um MVP para testá-la. No segundo passo (medir), o MVP é disponibilizado para uso por clientes reais com o intuito de coletar dados sobre a sua viabilidade. No terceiro passo (aprender), as métricas coletadas são analisadas e geram o que se denomina de aprendizado validado (validated learning).<br><br>
+      <div class="img">
       <img src="https://engsoftmoderna.info/figs/cap3/lean.svg" alt="Método Lean Startup para validação de MVPs">
       <br>
       <small>Método Lean Startup para validação de MVPs</small><br><br>
+      </div>
       O aprendizado obtido com um MVP pode resultar em três decisões:<br><br>
       <ul>
         <li>

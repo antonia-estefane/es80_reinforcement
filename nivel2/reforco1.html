@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ES80</title>
+    <style type="text/css">
+      @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+      *{
+        font-family: "Poppins", sans-serif;
+      }
+    	body {
+        background-color: #fff;
+        font-size: 20px;
+        padding: 0 80px;
+        text-align: justify;
+      }
+      h1, h2 {
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="main">
+    	<h1>O que são Requisitos Ágeis e como levantar requisitos com agilidade</h1>
+      
+
+      <p>
+        É muito comum ouvirmos falar sobre metodologia ágil em TI nos dias de hoje. Realmente é bem raro encontrar alguém envolvido com desenvolvimento de software que nunca tenha ao menos ouvido falar em termos como XP, Scrum, Histórias de Usuário, Pair programming e etc.<br><br>
+
+        O conceito de agilidade surgiu por volta dos anos 2000 com a criação do Manifesto Ágil, que possui entre seus doze princípios os objetivos de satisfazer o cliente por meio da entrega contínua e adiantada de valor agregado, além de aceitar mudanças de requisitos, mesmo no fim do desenvolvimento.<br><br>
+
+        Este artigo visa comparar de maneira geral o papel dos requisitos no Modelo Cascata, utilizado antigamente, com os Modelos Ágeis tão amplamente difundidos nos dias atuais. Vamos lá? <br><br>
+        <h2>Modelo Cascata x Requisitos Ágeis</h2>
+        No passado, quando uma empresa era contratada para desenvolver um software, o processo de desenvolvimento passava por quatro etapas básicas:
+      </p>
+      <ul>
+        <li>Requisitos</li>
+        <li>Planejamento</li>
+        <li>Desenvolvimento</li>
+        <li>Entrega</li>
+      </ul>
+        <br><br>
+        <p>
+        A fase de requisitos era determinada pela forte concepção da ideia do produto que estava sendo desenvolvido e o levantamento de todos os desejos e necessidades das partes envolvidas no projeto. Ao final desta fase era necessário entregar uma documentação chamada “especificação”, que funcionava como uma espécie de nota promissória de tudo aquilo que seria construído nas fases seguintes e entregue ao cliente na última etapa do desenvolvimento.<br><br>
+
+        Deveria expressar com exatidão e detalhar ao máximo todo o comportamento do software que estaria sendo desenvolvido, pois caso houvessem falhas na definição, todo o planejamento e desenvolvimento estariam comprometidos. Isso acabava gerando ainda mais custos ao projeto, deixando as partes envolvidas descontentes.<br><br>
+
+        Como é sabido, por mais que se faça um trabalho de levantamento e análise de requisitos muito bem feito, é um pouco difícil de garantir que falhas não ocorram. Por exemplo, as “necessidades” que o cliente expressou como sendo cruciais, ao decorrer do desenvolvimento, podem se mostrar dispensáveis ou sofrer alterações que impactam todo o plano de projeto criado inicialmente.<br><br>
+
+        Nesse contexto, o Modelo Ágil surge com a proposta de reduzir essa documentação. O foco é voltado para a colaboração e comunicação entre as partes envolvidas, buscando entregar valor de forma contínua e responder rápido às mudanças que surgirem no meio do caminho.<br><br>
+
+        Ao invés de uma documentação extensa e exaustiva, podemos lançar mão de algumas ferramentas mais sucintas e que cumprem muito bem o objetivo quando bem aplicadas. Uma delas é a escrita de histórias de usuário. Vejamos:<br><br>
+      </p>
+        <h2>Histórias de Usuário (User Stories)</h2>
+        <p>
+          As Histórias de Usuário comumente se baseiam no template:
+          <pre>
+            COMO UM &lt;USUARIO&gt;
+
+            DESEJO  &lt;NECESSIDADE&gt;
+
+            PARA QUE  &lt;OBJETIVO&gt;
+          </pre>
+        
+          Não é a única ferramenta que podemos usar para escrever requisitos ágeis, mas as Histórias de Usuário são muito interessantes por gerar alinhamento entre os clientes e o time de desenvolvimento. Elas fazem com que todos conversem na mesma linguagem e a necessidade possa ser transmitida com clareza. Para isso, devemos lembrar sempre que as histórias precisam ser criadas seguindo o conceito INVEST, ou seja:<br><br>
+        </p>
+
+        <ul>
+          <li>Independent (Independente): pode ser implementada em qualquer ordem</li>
+          <li>Negotiable (Negociável): pode ser removida a qualquer instante se descobrir que não é útil</li>
+          <li>Valuable (Valorosa): entregar valor</li>
+          <li>Estimable (Estimável): capaz de ser estimada</li>
+          <li>Small (Pequena): caber em uma Sprint (duas a quatro semanas)</li>
+          <li>Testable (Testável): possível de ser validada</li>
+        </ul>
+        <p>
+          Ainda que sejam interessantes, claras aos usuários e sucintas o suficiente para que todos consigam rapidamente ler e entender do que se tratam, as histórias geralmente não fornecem subsídios suficientes para que o time de desenvolvimento possa de fato codificar e desenvolver a solução. Neste ponto surgem os Critérios de Aceitação, que são uma lista de itens que expressam como o comportamento do negócio é validado, maximizando o entendimento do mesmo.
+        </p>
+        <h2>O desafio de garantir valor percebido</h2>
+        <p>
+          Ok, até aí tudo parece muito simples e fácil de ser feito, não é verdade? Pois é, na realidade não é tão simples assim. Por mais que estejamos diminuindo a quantidade de papel “inútil” para estimular a colaboração entre os envolvidos e tentando responder rapidamente às mudanças, ainda precisamos garantir que o valor esteja sendo entregue e percebido pelos nossos clientes.<br><br>
+
+          É aí que mora o problema, pois para que você saiba o que gera valor ao seu cliente, você precisa perguntar isso a ele, e nem sempre tudo aquilo o que ele te apresentar como sendo algo que ele deseja em seu sistema, é de fato uma real necessidade. É necessário saber fazer as perguntas corretas às pessoas certas para só então começarmos a pensar em gerar valor percebido.<br><br>
+
+          Ellen Gottesdiener, que é Coach de Produtos Ágeis e Presidente da EBG Consulting, também é especialista na área de descobrir o valor do produto através da colaboração. Ela aponta que existem três partes interessadas, as quais ela dá o nome de Parceiros do Produto, que possuem interesses distintos no sucesso do nosso produto. É a estes que devemos direcionar nossas perguntas se quisermos que o software que entregamos de fato gere valor aos nossos clientes.<br><br>
+          Estes, são:
+        </p>
+
+        <ul>
+          <li>
+            <strong>Parceiro Cliente</strong>: aquela pessoa que está buscando resolver um problema específico com produto que estamos criando.
+          </li>
+          <li>
+            <strong>Parceiro de Negócios</strong>: alguém que tem interesse em nosso software, porém focado no mercado e em geração de receita ou posicionamento estratégico que o nosso sistema pode fornecer a ele.
+          </li>
+          <li>
+            <strong>Parceiro de Tecnologia</strong>: quem tem interesse na qualidade, desempenho ou algo do tipo relacionado ao nosso sistema.
+          </li>
+        </ul>
+        <p>Bom, mas agora que já temos uma ideia de para quem fazer as perguntas, resta dizer quais são as perguntas que devemos fazer. Ellen acredita que para que pensemos em nossos requisitos, devemos ter em mente sete dimensões do produto para escrevermos requisitos simples, mas completos. Estas, são:</p>
+        <ul>
+          <li>Usuário</li>
+          <li>Interface</li>
+          <li>Ações</li>
+          <li>Dados</li>
+          <li>Controle</li>
+          <li>Ambiente</li>
+          <li>Atributos de qualidade</li>
+        </ul>
+      <br><br>
+        Concluindo: Requisitos ágeis são complexos, mas valem a pena<br><br>
+
+        Com tudo o que foi exposto no artigo, vimos que existem técnicas para tornar o levantamento de requisitos ágeis um processo mais fluido e estruturado. Levando em conta as necessidades reais do cliente e do usuário, e alinhando-as com o que é possível desenvolver, os requisitos ágeis são organizados para que o produto seja capaz de entregar o tão estimado valor percebido.<br><br>
+
+        Espero que o conteúdo seja útil para seus projetos. Se você tem mais dicas de estudo sobre métodos ágeis aplicados à Análise de Requisitos, deixe seu comentário com sugestões.<br><br>
+
+        Até a próxima!<br><br>
+      </p>
+    	
+      <h3><a href="https://imasters.com.br/agile/o-que-sao-requisitos-ageis-e-como-levantar-requisitos-com-agilidade" target="_blank">Fonte</a></h3>
+    </div>
+  </body>
+</html>
