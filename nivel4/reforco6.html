@@ -39,7 +39,7 @@
       </div>
         </li>
         <li>
-          Fornece um ponto de acesso global para aquela instância. Se lembra daquelas variáveis globais que você (tá bom, eu) usou para guardar alguns objetos essenciais? Embora sejam muito úteis, elas também são muito inseguras uma vez que qualquer código pode potencialmente sobrescrever os conteúdos daquelas variáveis e quebrar a aplicação.<br><br>
+          Fornece um ponto de acesso global para aquela instância. Se lembra daquelas variáveis globais que você &lpar;tá bom, eu&rpar; usou para guardar alguns objetos essenciais? Embora sejam muito úteis, elas também são muito inseguras uma vez que qualquer código pode potencialmente sobrescrever os conteúdos daquelas variáveis e quebrar a aplicação.<br><br>
 
           Assim como uma variável global, o padrão Singleton permite que você acesse algum objeto de qualquer lugar no programa. Contudo, ele também protege aquela instância de ser sobrescrita por outro código.<br><br>
 
@@ -89,38 +89,38 @@
               // O construtor do singleton devem sempre ser privado para
               // prevenir chamadas diretas de construção com o operador
               // `new`.
-              private constructor Database() is
+              private constructor Database&lpar;&rpar; is
                   // Algum código de inicialização, tal como uma conexão
                   // com um servidor de base de dados.
                   // ...
 
               // O método estático que controla acesso à instância do
               // singleton
-              public static method getInstance() is
-                  if (Database.instance == null) then
-                      acquireThreadLock() and then
+              public static method getInstance&lpar;&rpar; is
+                  if &lpar;Database.instance == null&rpar; then
+                      acquireThreadLock&lpar;&rpar; and then
                           // Certifique que a instância ainda não foi
                           // inicializada por outra thread enquanto está
                           // estiver esperando pela liberação do `lock`.
-                          if (Database.instance == null) then
-                              Database.instance = new Database()
+                          if &lpar;Database.instance == null&rpar; then
+                              Database.instance = new Database&lpar;&rpar;
                   return Database.instance
 
               // Finalmente, qualquer singleton deve definir alguma lógica
               // de negócio que deve ser executada em sua instância.
-              public method query(sql) is
+              public method query&lpar;sql&rpar; is
                   // Por exemplo, todas as solicitações à base de dados de
                   // uma aplicação passam por esse método. Portanto, você
                   // pode colocar a lógica de throttling ou cache aqui.
                   // ...
 
           class Application is
-              method main() is
-                  Database foo = Database.getInstance()
-                  foo.query("SELECT ...")
+              method main&lpar;&rpar; is
+                  Database foo = Database.getInstance&lpar;&rpar;
+                  foo.query&lpar;"SELECT ..."&rpar;
                   // ...
-                  Database bar = Database.getInstance()
-                  bar.query("SELECT ...")
+                  Database bar = Database.getInstance&lpar;&rpar;
+                  bar.query&lpar;"SELECT ..."&rpar;
                   // A variável `bar` vai conter o mesmo objeto que a
                   // variável `foo`.
         </pre>
