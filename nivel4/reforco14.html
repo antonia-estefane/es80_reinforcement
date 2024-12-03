@@ -1,0 +1,246 @@
+<!doctype html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ES80</title>
+    <link rel="stylesheet" href="../style.css" />
+
+    <style type="text/css">
+
+      span {
+        color: #c3c3c3;
+      }
+  
+
+    </style>
+  </head>
+  <body>
+    <div id="main">
+      <h1>Mão na massa: Template Method</h1>
+      <h2>Problema</h2>
+      Suponha um player de música que oferece várias maneiras de reproduzir as músicas de uma playlist. Para exemplificar suponha que podemos reproduzir a lista de músicas da seguinte maneira:
+      <br><br>
+      <ul>
+        <li>Ordenado por nome da música
+</li>
+        <li>Ordenado por nome do Autor
+</li>
+        <li>Ordenado por ano
+</li>
+        <li>Ordenado por estrela (preferência do usuário)
+</li>
+      </ul>
+      Uma ideia seria utilizar o padrão Strategy e implementar uma classe que define o método de reprodução para cada tipo de reprodução da playlist. Esta seria uma solução viável, pois manteríamos a flexibilidade para implementar novos modos de reprodução de maneira bem simples.<br><br>
+
+      No entanto, observe que, o algoritmo para reprodução de uma playlist é o mesmo, independente de qual modo esta sendo utilizado. A única diferença é a criação da playlist, que leva em consideração um dos atributos da música.<br><br>
+
+      Para suprir esta dificuldade vamos ver o padrão Template Method!<br><br>
+
+      <h2>Template Method</h2>
+      Como de costume, vejamos a intenção do padrão Template Method:<br><br>
+
+      “Definir o esqueleto de um algoritmo em uma operação, postergando alguns passos para as subclasses. Template Method permite que subclasses redefinam certos passo de um algoritmo sem mudar a estrutura do mesmo.” [1]<br><br>
+
+      Perfeito para o nosso problema! Precisamos definir o método de ordenação da Playlist mas só saberemos qual atributo utilizar em tempo de execução. Vamos definir então a estrutura de dados que define uma música:<br><br>
+
+      <div class="cod">
+        <pre>
+          public class MusicaMP3 {
+              String nome;
+              String autor;
+              String ano;
+              int estrelas;
+           
+              public MusicaMP3(String nome, String autor, String ano, int estrela) {
+                  this.nome = nome;
+                  this.autor = autor;
+                  this.ano = ano;
+                  this.estrelas = estrela;
+              }
+          }
+        </pre>
+      </div>
+
+      Para escolher como a playlist deve ser ordenada vamos criar uma pequena enumeração:<br><br>
+
+      <div class="cod">
+        <pre>
+          public enum ModoDeReproducao {
+              porNome, porAutor, porAno, porEstrela
+          }
+        </pre>
+      </div>
+      Agora vamos escrever a nossa classe que implementa o método template para ordenação da lista:<br><br>
+      <div class="cod">
+        <pre>
+          public abstract class OrdenadorTemplate {
+              public abstract boolean isPrimeiro(MusicaMP3 musica1, MusicaMP3 musica2);
+           
+              public ArrayList<MusicaMP3> ordenarMusica(ArrayList<MusicaMP3> lista) {
+                  ArrayList<MusicaMP3> novaLista = new ArrayList<MusicaMP3>();
+                  for (MusicaMP3 musicaMP3 : lista) {
+                      novaLista.add(musicaMP3);
+                  }
+           
+                  for (int i = 0; i < novaLista.size(); i++) {
+                      for (int j = i; j < novaLista.size(); j++) {
+                          if (!isPrimeiro(novaLista.get(i), novaLista.get(j))) {
+                              MusicaMP3 temp = novaLista.get(j);
+                              novaLista.set(j, novaLista.get(i));
+                              novaLista.set(i, temp);
+                          }
+                      }
+                  }
+           
+                  return novaLista;
+              }
+          }
+        </pre>
+      </div>
+      Basicamente definimos um método de ordenação, no caso o método Bolha, e deixamos a comparação dos atributos para as subclasses. Essa é a ideia de utilizar o método template, definir o esqueleto e permitir a personalização dele nas subclasses. Veja o exemplo da classe a seguir que ordena as músicas por nome:<br><br>
+      <div class="cod">
+        <pre>
+          public class OrdenadorPorNome extends OrdenadorTemplate {
+ 
+              @Override
+              public boolean isPrimeiro(MusicaMP3 musica1, MusicaMP3 musica2) {
+                  if (musica1.nome.compareToIgnoreCase(musica2.nome) <= 0) {
+                      return true;
+                  }
+                  return false;
+              }
+           
+          }
+        </pre>
+      </div>
+      Para implementar as outras formas de reprodução da lista basta definir, na subclasse, o método que compara uma música com outra e diz se é necessário trocar.<br><br>
+
+      O exemplo a seguir define a ordenação baseado no nível de preferência do usuário (aquelas estrelinhas dos players de música)<br><br>
+      <div class="cod">
+        <pre>
+          public class OrdenadorPorEstrela extends OrdenadorTemplate {
+ 
+              @Override
+              public boolean isPrimeiro(MusicaMP3 musica1, MusicaMP3 musica2) {
+                  if (musica1.estrelas > musica2.estrelas) {
+                      return true;
+                  }
+                  return false;
+              }
+           
+          }
+        </pre>
+      </div>
+      Pronto, definimos o algoritmo padrão e suas variações. Agora vamos ver a classe que manipula a playlist:<br><br>
+      <div class="cod">
+        <pre>
+          public class PlayList {
+              protected ArrayList<MusicaMP3> musicas;
+              protected OrdenadorTemplate ordenador;
+           
+              public PlayList(ModoDeReproducao modo) {
+                  musicas = new ArrayList<MusicaMP3>();
+                  switch (modo) {
+                  case porAno:
+                      ordenador = new OrdenadorPorAno();
+                      break;
+                  case porAutor:
+                      ordenador = new OrdenadorPorAutor();
+                      break;
+                  case porEstrela:
+                      ordenador = new OrdenadorPorEstrela();
+                      break;
+                  case porNome:
+                      ordenador = new OrdenadorPorNome();
+                      break;
+                  default:
+                      break;
+                  }
+              }
+           
+              public void setModoDeReproducao(ModoDeReproducao modo) {
+                  ordenador = null;
+                  switch (modo) {
+                  case porAno:
+                      ordenador = new OrdenadorPorAno();
+                      break;
+                  case porAutor:
+                      ordenador = new OrdenadorPorAutor();
+                      break;
+                  case porEstrela:
+                      ordenador = new OrdenadorPorEstrela();
+                      break;
+                  case porNome:
+                      ordenador = new OrdenadorPorNome();
+                      break;
+                  default:
+                      break;
+                  }
+              }
+           
+              public void adicionarMusica(String nome, String autor, String ano,
+                      int estrela) {
+                  musicas.add(new MusicaMP3(nome, autor, ano, estrela));
+              }
+           
+              public void mostrarListaDeReproducao() {
+                  ArrayList<MusicaMP3> novaLista = new ArrayList<MusicaMP3>();
+                  novaLista = ordenador.ordenarMusica(musicas);
+           
+                  for (MusicaMP3 musica : novaLista) {
+                      System.out.println(musica.nome + " - " + musica.autor + "\n Ano: "
+                              + musica.ano + "\n Estrelas: " + musica.estrelas);
+                  }
+              }
+          }
+        </pre>
+      </div>
+      Definimos métodos para inserir músicas e exibir a playlist e, de acordo com o parâmetro passado, criamos uma playlist. O código cliente ficaria da seguinte maneira:<br><br>
+      <div class="cod">
+        <pre>
+          public static void main(String[] args) {
+ 
+              PlayList minhaPlayList = new PlayList(ModoDeReproducao.porNome);
+              minhaPlayList.adicionarMusica("Everlong", "Foo Fighters", "1997", 5);
+              minhaPlayList.adicionarMusica("Song 2", "Blur", "1997", 4);
+              minhaPlayList.adicionarMusica("American Jesus", "Bad Religion", "1993",
+                      3);
+              minhaPlayList.adicionarMusica("No Cigar", "Milencollin", "2001", 2);
+              minhaPlayList.adicionarMusica("Ten", "Pearl Jam", "1991", 1);
+           
+              System.out.println("=== Lista por Nome de Musica ===");
+              minhaPlayList.mostrarListaDeReproducao();
+           
+              System.out.println("\n=== Lista por Autor ===");
+              minhaPlayList.setModoDeReproducao(ModoDeReproducao.porAutor);
+              minhaPlayList.mostrarListaDeReproducao();
+           
+              System.out.println("\n=== Lista por Ano ===");
+              minhaPlayList.setModoDeReproducao(ModoDeReproducao.porAno);
+              minhaPlayList.mostrarListaDeReproducao();
+           
+              System.out.println("\n=== Lista por Estrela ===");
+              minhaPlayList.setModoDeReproducao(ModoDeReproducao.porEstrela);
+              minhaPlayList.mostrarListaDeReproducao();
+          }
+        </pre>
+      </div>
+      Veja o quão simples foi alterar o modo como a lista é construída. No final, essa é a estrutura do projeto utilizando o Templte Method:<br><br>
+      <div class="img">
+        <img src="https://brizeno.wordpress.com/wp-content/uploads/2011/09/template-method.png">
+      </div>
+      <h2>Um pouco de teoria:</h2>
+      Já exemplificamos a principal vantagem do padrão Template Method, a facilidade de alteração do algoritmo principal. No entanto, deve-se tomar cuidado ao utilizar o padrão pois, se for preciso definir muitas operações nas subclasses, talvez seja necessário refatorar o código ou repensar o design.<br><br>
+
+      Outro problema é que, ao definir o método que executa o algoritmo genérico, não é possível proteger este método das subclasses. Ou seja, o cliente do código precisa saber exatamente quais operações substituir para alcançar o efeito desejado. Por exemplo, caso o programador da subclasse OrdenadorPorEstrela redefinisse o método de ordenação para realizar qualquer outra operação, poderíamos ter problemas.<br><br>
+
+      Por isso é tão importante definir os métodos que devem ser sobrescritos como abstratos (abstract em java, ou virtual puro em C++). Dessa maneira garante-se o princípio Open/Closed [2], que diz que uma classe deve ser aberta para extensões (fácil criar novas maneiras de reproduzir músicas) e fechada para alterações.<br><br>
+      
+
+      <h3>
+      <a href="https://brizeno.wordpress.com/2011/09/18/mao-na-massa-template-method/" target="_blank">Fonte</a>
+      </h3>
+    </div>
+  </body>
+</html>
