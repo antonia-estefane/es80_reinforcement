@@ -1,0 +1,224 @@
+<!doctype html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ES80</title>
+    <link rel="stylesheet" href="../style.css" />
+</head>
+
+<body>
+    <div id="main">
+        <h1>Métricas de qualidade de software </h1>
+        Em software, as medições podem ser utilizadas de maneira semelhante. Antes mesmo de o produto existir,
+        determina-se durante a análise de requisitos como deverá funcionar. (KOSCIANSKI, André, SOARES, Michel dos
+        Santos, 2007)<br><br>
+
+        De acordo com (KOSCIANSKI, André, SOARES, Michel dos Santos, 2007), pode-se, por exemplo, estabelecer qual o
+        tempo máximo que o programa poderá demorar para fornecer uma certa resposta. Com base nessa informação, os
+        projetistas e programadores deverão definir os algoritmos mais adequados, a forma de acesso e indexação de
+        arquivos, requisitos de hardware e outros fatores que influenciam o resultado.<br><br>
+
+        Segundo (Boehm,Brown e Lipow, 1976) definem uma árvore de atributos de qualidade de software bem definidos e bem
+        diferenciados (figura 1), onde as direções das setas indicam implicações lógicas. Por exemplo, um programa que é
+        fácil de ser mantido deve também ser facilmente testado, entendido e modificado.<br><br>
+
+
+        <div class="img">
+            <img
+                src="https://www.tiespecialistas.com.br/imagens/2015/11/%C3%81rvore-de-Caracter%C3%ADsticas-de-Qualidade-de-Software.jpg">
+            <small>Figura 1: Árvore de Características de Qualidade de Software (Boehm,Brown e Lipow, 1976)
+            </small>
+        </div>
+
+        A estrutura de mais alto nível reflete o uso de avaliação da qualidade de software. De acordo com (Boehm,Brown e
+        Lipow, 1976), destacam a aquisição do pacote de software, o qual deve ter as seguintes características de nível
+        médio na estrutura hierárquica: portabilidade, confiabilidade, eficiência, engenharia humana e facilidades de
+        teste, uso e modificação.<br><br>
+
+        Conforme (Davis, A. et al.,1993) também propõem uma lista de características que podem ser usadas para avaliar a
+        qualidade do modelo de análise e da correspondente especificação de requisitos como: falta de ambiguidade,
+        completude, corretude, facilidade de entendimento, verificabilidade, consistência interna e externa, concisão,
+        facilidade de rastreamento, facilidade de modificação, precisão e reusabilidade.<br><br>
+
+        <ul>
+            <li>As Características de qualidade segundo a norma ISO 9126 </li>
+        </ul>
+
+        <div class="img">
+            <img src="https://www.tiespecialistas.com.br/imagens/2015/11/Modelo-de-qualidade-da-ISSOIEC-9126.jpg">
+            <small>
+                Figura 2: Modelo de qualidade da ISSO/IEC 9126. A subcaracterística conformidade não está ilustrada.
+                (KOSCIANSKI, André, SOARES, Michel dos Santos, 2007)
+            </small>
+        </div>
+        <h3>Funcionalidade</h3>
+        A funcionalidade diz respeito àquilo que o software faz quando solicitado pelo usuário, como, por exemplo:
+        imprimir um relatório, apresentar dados na tela ou registrar uma informação em uma base de dados. (KOSCIANSKI,
+        André, SOARES, Michel dos Santos, 2007)<br><br>
+
+        A característica se refere à capacidade para o cumprimento de tarefas, em outros termos, se uma dada função foi
+        implementada ou não no programa. A maneira como essa função é executada é algo que pode ser avaliado em função
+        de outras características. (KOSCIANSKI, André, SOARES, Michel dos Santos, 2007)<br><br>
+
+        Pode-se dizer que esta característica é idêntica aos “requisitos funcionais” definidas por (Sommerville, 2003):
+        “Os requisitos funcionais para um sistema descrevem a funcionalidade ou os serviços que se espera que o sistema
+        forneça.”<br><br>
+
+        As sub características da Funcionalidade de acordo com (ISSO/IEC 9126-1):<br><br>
+        <ul>
+            <li><strong>Adequação</strong> é a capacidade do software de fornecer um grupo de funcionalidades adequadas
+                para tarefas especificas e para os objetivos dos usuários.</li>
+            <li><strong>Acurácia</strong> é a capacidade do software fornecer resultados corretos e acordados com os
+                necessário grau de precisão.</li>
+            <li>Interoperabilidade: é a capacidade do software de interagir com um ou mais sistemas específicos.
+            </li>
+            <li><strong>Segurança</strong> é a capacidade do software de proteger informações e dados, de tal modo que
+                pessoas ou sistema não autorizados não consigam acessá-las. Por outro lado, aqueles que estão
+                autorizados poderão acessar essas informações ou dados.
+            </li>
+            <li><strong>Conformidade com a funcionalidade</strong> é a capacidade do software e aderir aos padrões,
+                convenções, regras, regulamentações e leis relacionadas á funcionalidade.
+            </li>
+        </ul>
+
+        <h3>Confiabilidade</h3>
+
+        Habitualmente, diz que um produto é confiável quando não falha. E em software, sabemos que a ocorrência de
+        falhas é sempre uma possibilidade. (KOSCIANSKI, André, SOARES, Michel dos Santos, 2007)<br><br>
+
+        Em primeiro lugar, como foi feito com a característica “funcionalidade”, aqui também é preciso definir um
+        escopo. De acordo com a ISSO/IEC 9126, a confiabilidade de um programa se traduz com a capacidade de manter um
+        certo nível de desempenho quando operando em um certo contexto de uso.<br><br>
+
+        Segundo (Sommerville, 2003) classifica a confiabilidade entre as subcaracterísticas de confiabilidade por se
+        tratarem de operações que o software é programado para realizar. Assim temos a tolerância a falhas e a
+        recuperabilidade, ou seja, recuperação de falhas.<br><br>
+
+        As sub características da Confiabilidade de acordo com (ISSO/IEC 9126-1):<br><br>
+        <ul>
+            <li>Maturidade: é a capacidade do software de evitar falhas decorrentes de falhas de software.
+            </li>
+            <li>Tolerância a falhas: é a capacidade do software de manter um nível específico de performance em caso de
+                falhas ou de violações em sua interface específica.
+            </li>
+            <li>Recuperabilidade: é a capacidade do software de restabelecer um nível específico de performance em caso
+                de falhas ou violações em sua interface específica.
+            </li>
+            <li>Conformidade com a funci0nalidade: é a capacidade do software de aderir a padrões, regras,
+                regulamentações e leis relacionadas à conformidade.
+            </li>
+        </ul>
+
+        <h3>Usabilidade</h3>
+
+        Usabilidade representa basicamente o quão é fácil usar o produto. (Qualidade de software) esta é provavelmente a
+        característica mais difícil de tratar, tanto durante a definição de requisitos quanto durante os estágios
+        posteriores do ciclo de vida, na verificação e validação do produto. (KOSCIANSKI, André, SOARES, Michel dos
+        Santos, 2007) <br><br>
+
+        As sub características da Usabilidade de acordo com (ISSO/IEC 9126-1): <br><br>
+        <ul>
+            <li>Inteligibilidade: é a capacidade do software de permitir ao usuário entender se o programa é amigável e
+                como ele pode ser usado para tarefas particulares e outras condições de uso.
+            </li>
+            <li>Apreensibilidade: é a capacidade do software de permitir ao usuário aprender com sua aplicação.
+            </li>
+            <li>Operabilidade: é a capacidade do software de permitir o usuário operá-lo e controlá-lo.
+            </li>
+            <li>Atratividade: é a capacidade do software de ser atrativo para o usuário.
+            </li>
+            <li>Conformidade com a usabilidade: é a capacidade do software de aderir aos padrões, convenções, regras,
+                regulamentações e leis relacionadas à usabilidade.
+            </li>
+        </ul>
+        Eficiência
+
+        De acordo com a ISSO/IEC 9126, eficiência é o tempo de execução e os recursos envolvidos são compatíveis com o
+        nível de desempenho do software.<br><br>
+
+        A velocidade de operação de um software pode ser afetada por inúmeros fatores: velocidade da CPU, quantidade de
+        memória cache e memória RAM, desempenho de disco rígido, volume de tráfego de rede, interação com outros
+        softwares e com o sistema operacional, configurações deste último etc. (KOSCIANSKI, André, SOARES, Michel dos
+        Santos, 2007)<br><br>
+
+        As sub características da Eficiência de acordo com (ISSO/IEC 9126-1):<br><br>
+        <ul>
+            <li>Comportamento em relação ao tempo: é a capacidade do software de fornecer tempos apropriados de resposta
+                e de processamento, relativos à soma de recursos e sob condições preestabelecidas.
+            </li>
+            <li>Comportamento em relação aos recursos: é a capacidade do software de utilizar a soma e os tipos de
+                recurso quando executar suas funcionalidades sob condições preestabelecidas.
+            </li>
+            <li>Conformidade com a eficiência: é a capacidade do software de aderir aos padrões, convenções, regras,
+                regulamentações e leis relacionadas á eficiência.
+            </li>
+        </ul>
+
+        <h3>Manutenibilidade</h3>
+
+        De acordo com a ISSO/IEC 9126, é a capacidade do software ser mantido.<br><br>
+
+        A característica de manutenibilidade esta relacionada à facilidade de modificação de um produto de software.
+        (KOSCIANSKI, André, SOARES, Michel dos Santos, 2007)<br><br>
+
+        Segundo (KOSCIANSKI, André, SOARES, Michel dos Santos, 2007), esta característica é de interesse especialmente
+        para desenvolvedores e não deve ser confundida com a possibilidade de configurar o software. Uma modificação
+        consiste, por exemplo, em uma correção do produto ou da adaptação a mudanças de requisitos, como mudanças de
+        legislação. <br><br>
+
+        As sub características da Manutenibilidade de acordo com (ISSO/IEC 9126-1): <br><br>
+
+        <ul>
+            <li>Analisabilidade: é a capacidade do software de passar por diagnósticos em busca de deficiências ou
+                origens de falhas, ou para a identificação de pares que devem ser alteradas.
+            </li>
+            <li>Modificabilidade: é a capacidade do software de permitir que uma alteração específica seja implementada.
+            </li>
+            <li>Estabilidade: é a capacidade do software de evitar efeitos inesperados em decorrência de alterações.
+            </li>
+            <li>Testabilidade: é a capacidade do software de ser testado após alterações.
+            </li>
+            <li>Conformidade com a manutenibilidade: é a capacidade do software de aderir aos padrões, convenções,
+                regras, regulamentações e leis relacionadas à manutenibilidade.
+            </li>
+        </ul>
+        Portabilidade
+
+        De acordo com a ISSO/IEC 9126, é a capacidade do software ser transferido de um ambiente para outro. <br><br>
+
+        A palavra “portabilidade” é utilizada geralmente para indicar a possibilidade de um código-fonte ser utilizado
+        em diferentes plataformas de execução. Na norma 9126, a definição foi estendida para abranger a idéia de portar
+        aplicações entre organizações diferentes. Em tese, supõe-se que um programa possa, então, ser elaborado para
+        operar em ambientes com características diferentes. (KOSCIANSKI, André, SOARES, Michel dos Santos, 2007)
+        <br><br>
+
+        As sub características da Portabilidade de acordo com (ISSO/IEC 9126-1): <br><br>
+        <ul>
+            <li>Adaptabilidade: é a capacidade do software de ser adaptado a ambientes diferentes sem a aplicação de
+                ações ou outros meios que não aqueles previamente estabelecidos.
+            </li>
+            <li>Facilidade de instalação: é a capacidade do software de ser instalado num ambiente especifico.
+            </li>
+            <li>Coexistência: é a capacidade do software de coexistir com outro software no mesmo ambiente e
+                compartilhar recursos.
+            </li>
+            <li>Capacidade para substituir: é a capacidade do software de substituir um outro software no mesmo ambiente
+                para o mesmo propósito.
+            </li>
+            <li>Conformidade com a portabilidade: é a capacidade do software de aderir aos padrões, convenções, regras,
+                regulamentações e leis relacionadas à portabilidade.
+            </li>
+        </ul>
+
+        <br><br>
+
+
+        <h3>
+            <a href="https://www.tiespecialistas.com.br/metricas-de-qualidade-de-software/" target="_blank">Fonte</a>
+        </h3>
+    </div>
+</body>
+
+</html>
